@@ -1,0 +1,8 @@
+module SAMBA.Device.SAM9X7
+BCP 3.7 SAM9X7-bcp.js
+BSCR 3.7 SAM9X7-bscr.js
+SAM9X7 3.7 SAM9X7.qml
+SAM9X7Config 3.7 SAM9X7Config.qml
+SAM9X7BootConfigApplet 3.7 SAM9X7BootConfigApplet.qml
+SBCP 3.7 SAM9X7-sbcp.js
+SAM9X75DDR3EB 3.7 SAM9X75DDR3EB.qml

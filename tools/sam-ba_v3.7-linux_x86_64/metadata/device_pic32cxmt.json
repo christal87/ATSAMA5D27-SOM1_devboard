@@ -1,0 +1,6 @@
+{
+	"module": "SAMBA.Device.PIC32CXMT",
+    "module_version": "3.7",
+	"classname": "PIC32CXMT",
+	"type": "device"
+}

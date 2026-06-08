@@ -1,0 +1,29 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model 87520-0010BLF
+#/2245024/133399/2.47/6/4/Connector
+DEF 87520-0010BLF J 0 30 Y Y 1 F N
+F0 "J" 750 300 50 H V L CNN
+F1 "87520-0010BLF" 750 200 50 H V L CNN
+F2 "875200010BLF" 750 100 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/87520-0010BLF.pdf" 750 0 50 H I L CNN
+F4 "USB 2.0 Type A receptacle white" 750 -100 50 H I L CNN "Description"
+F5 "7.8" 750 -200 50 H I L CNN "Height"
+F6 "Amphenol" 750 -300 50 H I L CNN "Manufacturer_Name"
+F7 "87520-0010BLF" 750 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "87520-0010BLF" 750 -500 50 H I L CNN "Arrow Part Number"
+F9 "https://www.arrow.com/en/products/87520-0010blf/amphenol-fci" 750 -600 50 H I L CNN "Arrow Price/Stock"
+F10 "649-87520-0010BLF" 750 -700 50 H I L CNN "Mouser Part Number"
+F11 "https://www.mouser.co.uk/ProductDetail/Amphenol-FCI/87520-0010BLF?qs=x6EjVpvqMVP%2F2to87x7cdQ%3D%3D" 750 -800 50 H I L CNN "Mouser Price/Stock"
+DRAW
+X 1 1 900 0 200 L 50 50 0 0 P
+X 2 2 900 -100 200 L 50 50 0 0 P
+X 3 3 900 -200 200 L 50 50 0 0 P
+X 4 4 900 -300 200 L 50 50 0 0 P
+X MH1 MH1 0 0 200 R 50 50 0 0 P
+X MH2 MH2 0 -100 200 R 50 50 0 0 P
+P 5 0 1 6 200 100 700 100 700 -400 200 -400 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

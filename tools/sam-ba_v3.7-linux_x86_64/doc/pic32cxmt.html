@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- pic32cxmt.qdoc -->
+  <title>Getting started with SAM-BA on PIC32CXMT devices | SAM-BA 3.7</title>
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="postheader" valign="center"> <a href="index.html">Home</a> &middot; </td></tr></table><li>Getting started with SAM-BA on PIC32CXMT devices</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#connecting-to-the-sam-ba-monitor">Connecting to the SAM-BA monitor</a></li>
+<li class="level2"><a href="#rs-232-uart">RS-232 UART</a></li>
+<li class="level2"><a href="#jtag-port">JTAG port</a></li>
+<li class="level1"><a href="#supported-applets">Supported applets</a></li>
+<li class="level1"><a href="#programming-the-internal-flash">Programming the internal flash</a></li>
+<li class="level1"><a href="#getting-setting-the-gpnvm-bits">Getting/Setting the GPNVM bits</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">Getting started with SAM-BA on PIC32CXMT devices</h1>
+<span class="subtitle"></span>
+<!-- $$$pic32cxmt.html-description -->
+<div class="descr"> <a name="details"></a>
+<a name="connecting-to-the-sam-ba-monitor"></a>
+<h2 id="connecting-to-the-sam-ba-monitor">Connecting to the SAM-BA monitor</h2>
+<a name="rs-232-uart"></a>
+<h3 >RS-232 UART</h3>
+<p>For RS-232 UART connection, the serial port on the host running <i>sam-ba</i> used to connect to the PIC32CXMT board design must be plugged to its <b>FLEXCOM0 USART ioset 1</b> pins.</p>
+<p><b>The name of this serial port <i>may</i> be provided on the command line if needed.</b></p>
+<p>For instance, in the case of the COM9 serial port under Windows:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial:COM9 <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>m version
+Opening serial port <span class="char">'COM9'</span>
+Connection opened<span class="operator">.</span>
+ROM Version: v1<span class="operator">.</span><span class="number">0</span> Jul  <span class="number">4</span> <span class="number">2019</span> <span class="number">11</span>:<span class="number">58</span>:<span class="number">23</span>
+Connection closed<span class="operator">.</span></pre>
+<p>Or for /dev/ttyUSB0 when using a FTDI USB/RS-232 adaptor under Linux:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial:ttyUSB0 <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>m version
+Opening serial port <span class="char">'ttyUSB0'</span>
+Connection opened<span class="operator">.</span>
+ROM Version: v1<span class="operator">.</span><span class="number">0</span> Jul  <span class="number">4</span> <span class="number">2019</span> <span class="number">11</span>:<span class="number">58</span>:<span class="number">23</span>
+Connection closed<span class="operator">.</span></pre>
+<a name="jtag-port"></a>
+<h3 >JTAG port</h3>
+<p>Early Adopter Samples (EAS) suffer from a limitation. Indeed, at power-on or reset, the JTAG access is discarded and must be granted by first disabling the write protection of SFR registers then disabling the JTAG software lock.</p>
+<pre class="cpp"><span class="preprocessor">#!/bin/bash</span>
+
+SFR_WPMR<span class="operator">=</span><span class="number">0x400504E4</span>
+SFR_WPMR_VALUE<span class="operator">=</span><span class="number">0x53465200</span>
+
+SFR_JTAG<span class="operator">=</span><span class="number">0x40050490</span>
+SFR_JTAG_VALUE<span class="operator">=</span><span class="number">0</span>
+
+SAMBA<span class="operator">=</span><span class="string">&quot;sam-ba -p serial -d pic32cxmt&quot;</span>
+
+$SAMBA <span class="operator">-</span>m write32:$SFR_WPMR:$SFR_WPMR_VALUE <span class="operator">-</span>m write32:$SFR_JTAG:$SFR_JTAG_VALUE</pre>
+<a name="supported-applets"></a>
+<h2 id="supported-applets">Supported applets</h2>
+<p>The list of supported applets can be displayed with the following command:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a help
+Known applets: internalflash</pre>
+<div class="table"><table class="generic">
+ <thead><tr class="qt-style"><th >Applet</th><th >Short description</th><th >Examples</th></tr></thead>
+<tr valign="top" class="odd"><td ><a href="internalflash.html">internalflash</a></td><td >Manage the internal flash and its GPNVM bits</td><td ><a href="pic32cxmt.html#programming-the-internal-flash">Programming the internal flash</a>, <a href="pic32cxmt.html#getting-setting-the-gpnvm-bits">Getting/Setting the GPNVM bits</a></td></tr>
+</table></div>
+<a name="programming-the-internal-flash"></a>
+<h2 id="programming-the-internal-flash">Programming the internal flash</h2>
+<p>In the following example, we program the <i>boot.bin</i> program into the internal flash of the PIC32CXMT device:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c erase:<span class="number">0</span>:<span class="number">0x1000</span> <span class="operator">-</span>c write:boot<span class="operator">.</span>bin
+$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c verify:boot<span class="operator">.</span>bin</pre>
+<p>For products with a second bank (SEFC1), the bank (or flash controller instance) is selected by optional parameter of the <i>internalflash</i> applet:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash:help
+Syntax: internalflash:<span class="operator">[</span><span class="operator">&lt;</span>instance<span class="operator">&gt;</span><span class="operator">]</span>
+Parameters:
+    instance   Flash controller instance
+Examples:
+    internalflash      use <span class="keyword">default</span> board settings
+    internalflash:<span class="number">1</span>    select Flash Controller <span class="number">1</span> (SEFC1)</pre>
+<p>When no default board settings exist, the default flash controller is SEFC0.</p>
+<a name="getting-setting-the-gpnvm-bits"></a>
+<h2 id="getting-setting-the-gpnvm-bits">Getting/Setting the GPNVM bits</h2>
+<p>Some GPNVM bits, like System Boot Selection bit-field, are used to select the boot mode of the PIC32CXMT device or to enable some of its hardware protections.</p>
+<p>Therefore, the <i>internalflash</i> applet also provides means to get/set those GPNVM bits.</p>
+<p>For instance, once the a valid application has been programmed into the internal flash, the System Boot Selection (SBS) can be set to 0011b in order to select the standard boot mode on the next power-on or reset:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c setgpnvm:STANDARD_BOOT:SBS_MASK <span class="operator">-</span>c getgpnvm
+Opening serial port <span class="char">'ttyUSB0'</span>
+Connection opened<span class="operator">.</span>
+Detected memory size is <span class="number">1048576</span> bytes<span class="operator">.</span>
+Page size is <span class="number">512</span> bytes<span class="operator">.</span>
+Buffer is <span class="number">59904</span> bytes (<span class="number">117</span> pages) at address <span class="number">0x20000f90.</span>
+Supported erase block sizes: <span class="number">4KB</span><span class="operator">,</span> <span class="number">8KB</span><span class="operator">,</span> <span class="number">16KB</span><span class="operator">,</span> <span class="number">32KB</span>
+Executing command <span class="char">'setgpnvm:STANDARD_BOOT:SBS_MASK'</span>
+Executing command <span class="char">'getgpnvm'</span>
+GPNVM <span class="operator">=</span> <span class="number">0x00000060</span> <span class="operator">/</span> STANDARD_BOOT
+Connection closed<span class="operator">.</span></pre>
+</div>
+<!-- @@@pic32cxmt.html -->
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="60%" align="left">Copyright &copy; 2018 Microchip Technology</td>
+<td width="40%" align="right"><div align="right">SAM-BA Documentation</div></td>
+</tr></table></div></address></body>
+</html>

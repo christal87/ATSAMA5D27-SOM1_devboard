@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MIC23451-AAAYFL-T5
+D Microchip, MIC23451-AAAYFL-T5 Step-Down Switching Regulator Triple 2A Adjustable, 1  3.3 V, 26-Pin QFN
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/MIC23451.pdf
+$ENDCMP
+#
+#End Doc Library

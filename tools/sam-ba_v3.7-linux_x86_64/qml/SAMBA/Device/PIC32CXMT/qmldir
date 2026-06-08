@@ -1,0 +1,7 @@
+module SAMBA.Device.PIC32CXMT
+GPNVM 3.7 pic32cxmt-gpnvm.js
+PIC32CXMT 3.7 PIC32CXMT.qml
+PIC32CXMTConfig 3.7 PIC32CXMTConfig.qml
+PIC32CXMTInternalFlashApplet 3.7 PIC32CXMTInternalFlashApplet.qml
+USR 3.7 pic32cxmt-usr.js
+WPMR 3.7 pic32cxmt-wpmr.js

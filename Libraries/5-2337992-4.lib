@@ -1,0 +1,37 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model 5-2337992-4
+#/2730265/133399/2.47/14/4/Connector
+DEF 5-2337992-4 J 0 30 Y Y 1 F N
+F0 "J" 850 300 50 H V L CNN
+F1 "5-2337992-4" 850 200 50 H V L CNN
+F2 "523379924" 850 100 50 H I L CNN
+F3 "https://componentsearchengine.com/Datasheets/1/5-2337992-4.pdf" 850 0 50 H I L CNN
+F4 "Modular Connectors / Ethernet Connectors RJ45 JACK MAG. POE 10/100 LED 1X1" 850 -100 50 H I L CNN "Description"
+F5 "13.7" 850 -200 50 H I L CNN "Height"
+F6 "TE Connectivity" 850 -300 50 H I L CNN "Manufacturer_Name"
+F7 "5-2337992-4" 850 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "" 850 -500 50 H I L CNN "Arrow Part Number"
+F9 "" 850 -600 50 H I L CNN "Arrow Price/Stock"
+F10 "571-5-2337992-4" 850 -700 50 H I L CNN "Mouser Part Number"
+F11 "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/5-2337992-4?qs=l4Gc20tDgJLHtal8kumJHQ%3D%3D" 850 -800 50 H I L CNN "Mouser Price/Stock"
+DRAW
+X P1 P1 0 0 200 R 50 50 0 0 P
+X P2 P2 0 -100 200 R 50 50 0 0 P
+X P3 P3 0 -200 200 R 50 50 0 0 P
+X P4 P4 0 -300 200 R 50 50 0 0 P
+X P5 P5 0 -400 200 R 50 50 0 0 P
+X P6 P6 0 -500 200 R 50 50 0 0 P
+X P7 P7 0 -600 200 R 50 50 0 0 P
+X P8 P8 1000 0 200 L 50 50 0 0 P
+X P9 P9 1000 -100 200 L 50 50 0 0 P
+X P10 P10 1000 -200 200 L 50 50 0 0 P
+X P11 P11 1000 -300 200 L 50 50 0 0 P
+X P12 P12 1000 -400 200 L 50 50 0 0 P
+X MH1 MH1 1000 -500 200 L 50 50 0 0 P
+X MH2 MH2 1000 -600 200 L 50 50 0 0 P
+P 5 0 1 6 200 100 800 100 800 -700 200 -700 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

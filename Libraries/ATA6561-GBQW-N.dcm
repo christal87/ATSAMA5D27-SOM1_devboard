@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ATA6561-GBQW-N
+D Microchip Technology
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/ATA6560-ATA6561-High-Speed-CAN-Transceiver-DS20005991A.pdf
+$ENDCMP
+#
+#End Doc Library

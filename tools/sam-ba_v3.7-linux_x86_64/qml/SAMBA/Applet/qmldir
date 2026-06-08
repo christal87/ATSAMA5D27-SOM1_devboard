@@ -1,0 +1,27 @@
+module SAMBA.Applet
+BootCfgOTPC 3.7 otpc-bootcfg.js
+BootConfigApplet 3.7 BootConfigApplet.qml
+BootConfigOTPCApplet 3.7 BootConfigOTPCApplet.qml
+ExtRamApplet 3.7 ExtRamApplet.qml
+ExtRamConfig 3.7 ExtRamConfig.qml
+InternalFlashApplet 3.7 InternalFlashApplet.qml
+InternalFlashConfig 3.7 InternalFlashConfig.qml
+InternalRCApplet 3.7 InternalRCApplet.qml
+LowlevelApplet 3.7 LowlevelApplet.qml
+LowlevelConfig 3.7 LowlevelConfig.qml
+LowlevelPresetApplet 3.7 LowlevelPresetApplet.qml
+LowlevelPresetConfig 3.7 LowlevelPresetConfig.qml
+NANDFlashApplet 3.7 NANDFlashApplet.qml
+NANDFlashConfig 3.7 NANDFlashConfig.qml
+PairingModeApplet 3.7 PairingModeApplet.qml
+QSPIFlashApplet 3.7 QSPIFlashApplet.qml
+QSPIFlashConfig 3.7 QSPIFlashConfig.qml
+ReadUniqueIDApplet 3.7 ReadUniqueIDApplet.qml
+ResetApplet 3.7 ResetApplet.qml
+SDMMCApplet 3.7 SDMMCApplet.qml
+SDMMCConfig 3.7 SDMMCConfig.qml
+SerialConfig 3.7 SerialConfig.qml
+SerialFlashApplet 3.7 SerialFlashApplet.qml
+SerialFlashConfig 3.7 SerialFlashConfig.qml
+SetGPIOApplet 3.7 SetGPIOApplet.qml
+SetGPIOConfig 3.7 SetGPIOConfig.qml

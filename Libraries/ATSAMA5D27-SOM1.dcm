@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ATSAMA5D27-SOM1
+D Microchip ATSAMA5D27-SOM1 ARM Cortex A5 Microcontroller, 500MHz, 8 MB Flash, 176-Pin Module
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/SAMA5D27-SOM1-Data-Sheet-DS60001521C.pdf
+$ENDCMP
+#
+#End Doc Library

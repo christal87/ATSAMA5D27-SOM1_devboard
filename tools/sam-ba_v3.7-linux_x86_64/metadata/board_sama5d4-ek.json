@@ -1,0 +1,6 @@
+{
+	"module": "SAMBA.Device.SAMA5D4",
+    "module_version": "3.7",
+	"classname": "SAMA5D4EK",
+	"type": "board"
+}

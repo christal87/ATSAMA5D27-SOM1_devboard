@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP TMUX1219DCKR
+D 1-ch, 2:1 general-purpose analog multiplexer with 1.8-V logic control
+K
+F http://www.ti.com/lit/gpn/TMUX1219
+$ENDCMP
+#
+#End Doc Library

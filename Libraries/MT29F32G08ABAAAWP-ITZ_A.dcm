@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MT29F32G08ABAAAWP-ITZ_A
+D SLC NAND Flash 3.3V 32G-bit 4G x 8 48-Pin TSOP
+K
+F https://www.micron.com/~/media/documents/products/data-sheet/nand-flash/70-series/m73a_32gb_64gb_128gb_256gb_asyncsync_nand.pdf
+$ENDCMP
+#
+#End Doc Library

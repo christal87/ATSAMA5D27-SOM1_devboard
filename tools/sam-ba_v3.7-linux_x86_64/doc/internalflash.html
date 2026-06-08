@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- internalflash.qdoc -->
+  <title>SAM-BA internalflash applet | SAM-BA 3.7</title>
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="postheader" valign="center"> <a href="index.html">Home</a> &middot; </td></tr></table><li>SAM-BA internalflash applet</li>
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#applet-initialization">Applet initialization</a></li>
+<li class="level1"><a href="#supported-commands">Supported commands</a></li>
+<li class="level2"><a href="#the-erase-command">The erase command</a></li>
+<li class="level2"><a href="#the-write-command">The write command</a></li>
+<li class="level2"><a href="#the-read-command">The read command</a></li>
+<li class="level2"><a href="#the-verify-commands">The verify commands</a></li>
+<li class="level2"><a href="#the-eraseup-readup-writeup-and-verifyup-commands">The eraseup, readup, writeup and verifyup commands</a></li>
+<li class="level2"><a href="#the-getgpnvm-and-setgpnvm-commands">The getgpnvm and setgpnvm commands</a></li>
+<li class="level2"><a href="#the-getwpmr-and-setwpmr-commands">The getwpmr and setwpmr commands</a></li>
+<li class="level2"><a href="#the-getusr-and-setusr-commands">The getusr and setusr commands</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">SAM-BA internalflash applet</h1>
+<span class="subtitle"></span>
+<!-- $$$internalflash.html-description -->
+<div class="descr"> <a name="details"></a>
+<p>The <i>internalflash</i> applet drives the flash controller to progam the internal flash memory of the SAM MCU device.</p>
+<a name="applet-initialization"></a>
+<h2 id="applet-initialization">Applet initialization</h2>
+<p>The <i>internalflash</i> applet accepts one optional parameter to select the flash controller when initialized:</p>
+<pre class="cpp">sam<span class="operator">-</span>ba <span class="operator">-</span>p <span class="operator">&lt;</span>port<span class="operator">&gt;</span> <span class="operator">-</span>d <span class="operator">&lt;</span>device<span class="operator">&gt;</span> <span class="operator">-</span>a internalflash:help
+
+$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash:help
+Syntax: internalflash:<span class="operator">[</span><span class="operator">&lt;</span>instance<span class="operator">&gt;</span><span class="operator">]</span>
+Parameters:
+    instance   Flash controller instance
+Examples:
+    internalflash      use <span class="keyword">default</span> board settings
+    internalflash:<span class="number">1</span>    select Flash Controller <span class="number">1</span> (SEFC1)</pre>
+<p>When no board settings are available, the default flash controller instance is 0 (SEFC0).</p>
+<a name="supported-commands"></a>
+<h2 id="supported-commands">Supported commands</h2>
+<p>The list of commands supported by the <i>internalflash</i> applet can be displayed with the following command:</p>
+<pre class="cpp">sam<span class="operator">-</span>ba <span class="operator">-</span>p <span class="operator">&lt;</span>port<span class="operator">&gt;</span> <span class="operator">-</span>d <span class="operator">&lt;</span>device<span class="operator">&gt;</span> <span class="operator">-</span>a internalflash <span class="operator">-</span>c help
+
+$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c help</pre>
+<a name="the-erase-command"></a>
+<h3 >The erase command</h3>
+<p>The <i>erase</i> command resets to 0xFF a range of erase blocks. The size of those erase blocks is given in the product datasheet.</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c erase:help
+<span class="operator">*</span> erase <span class="operator">-</span> erase all <span class="keyword">or</span> part of the memory
+Syntax:
+    erase:<span class="operator">[</span><span class="operator">&lt;</span>addr<span class="operator">&gt;</span><span class="operator">]</span>:<span class="operator">[</span><span class="operator">&lt;</span>length<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    erase                 erase all
+    erase:<span class="number">4096</span>            erase from <span class="number">4096</span> to end
+    erase:<span class="number">0x1000</span>:<span class="number">0x10000</span>  erase from <span class="number">0x1000</span> to <span class="number">0x11000</span>
+    erase<span class="operator">::</span><span class="number">0x1000</span>         erase from <span class="number">0</span> to <span class="number">0x1000</span></pre>
+<a name="the-write-command"></a>
+<h3 >The write command</h3>
+<p>The <i>write</i> command programs data from a binary file into the internal flash pages. The blocks containing the pages to be programmed should be erased first with the <i>erase</i> command. Padding bytes are added to align programmed data to the page boundary. The page size is given by the product datasheet.</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c write:help
+<span class="operator">*</span> write <span class="operator">-</span> write to memory from a file
+Syntax:
+    write:<span class="operator">&lt;</span>filename<span class="operator">&gt;</span>:<span class="operator">[</span><span class="operator">&lt;</span>addr<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    write:bootstrap<span class="operator">.</span>bin         write bootstrap<span class="operator">.</span>bin to start of memory
+    write:u<span class="operator">-</span>boot<span class="operator">.</span>bin:<span class="number">0x10000</span>    write u<span class="operator">-</span>boot<span class="operator">.</span>bin at offset <span class="number">0x10000</span></pre>
+<a name="the-read-command"></a>
+<h3 >The read command</h3>
+<p>The <i>read</i> command loads data from the internal flash into a binary file.</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c read:help
+<span class="operator">*</span> read <span class="operator">-</span> read from memory to a file
+Syntax:
+    read:<span class="operator">&lt;</span>filename<span class="operator">&gt;</span>:<span class="operator">[</span><span class="operator">&lt;</span>addr<span class="operator">&gt;</span><span class="operator">]</span>:<span class="operator">[</span><span class="operator">&lt;</span>length<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    read:firmware<span class="operator">.</span>bin              read all to firmware<span class="operator">.</span>bin
+    read:firmware<span class="operator">.</span>bin:<span class="number">0x1000</span>       read from <span class="number">0x1000</span> to end into firmware<span class="operator">.</span>bin
+    read:firmware<span class="operator">.</span>bin:<span class="number">0x1000</span>:<span class="number">1024</span>  read <span class="number">1024</span> bytes from <span class="number">0x1000</span> into firmware<span class="operator">.</span>bin
+    read:firmware<span class="operator">.</span>bin<span class="operator">::</span><span class="number">1024</span>        read <span class="number">1024</span> bytes from start of memory into firmware<span class="operator">.</span>bin</pre>
+<a name="the-verify-commands"></a>
+<h3 >The verify commands</h3>
+<p>The <i>verify</i> command compares the data programmed in the internal flash with the content of a given binary file.</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c verify:help
+<span class="operator">*</span> verify <span class="operator">-</span> verify memory from a file
+Syntax:
+    verify:<span class="operator">&lt;</span>filename<span class="operator">&gt;</span>:<span class="operator">[</span><span class="operator">&lt;</span>addr<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    verify:firmware<span class="operator">.</span>bin         verify that start of memory matches firmware<span class="operator">.</span>bin
+    verify:firmware<span class="operator">.</span>bin:<span class="number">0x1000</span>  verify that memory at offset <span class="number">0x1000</span> matches firmware<span class="operator">.</span>bin</pre>
+<a name="the-eraseup-readup-writeup-and-verifyup-commands"></a>
+<h3 >The eraseup, readup, writeup and verifyup commands</h3>
+<p>The <i>eraseup</i>, <i>readup</i>, <i>writeup</i> and <i>verifyup</i> commands are similar to the <i>erase</i>, <i>read</i>, <i>write</i> and <i>verify</i> commands; they takes the exact same parameters. The only difference is that the <i>*up</i> command set is dedicated to User Signature pages whereas the other command set only applies to regular pages within the internal flash.</p>
+<a name="the-getgpnvm-and-setgpnvm-commands"></a>
+<h3 >The getgpnvm and setgpnvm commands</h3>
+<p>The <i>getgpnvm</i> and <i>setgpnvm</i> commands allow to read and modify GPNVM bits managed by the flash controller. Those commands accept an optional <i>mask</i> parameter to filter the GPNVM bits upon which the command applies. If no <i>mask</i> is provided, then the command applies to all GPNVM bits:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c getgpnvm:help
+<span class="operator">*</span> getgpnvm <span class="operator">-</span> get GPNVM bits
+Syntax:
+    getgpnvm:<span class="operator">[</span><span class="operator">&lt;</span>mask<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    getgpnvm               get all GPNVMs
+    getgpnvm:<span class="number">0x1e0</span>         get GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> only
+    getgpnvm:SBS_MASK      get GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> only
+
+<span class="operator">&lt;</span>mask<span class="operator">&gt;</span> value can be either a number <span class="keyword">or</span> a sequence of tokens separated by commas:
+    SECURITY               (GPNVM<span class="operator">[</span><span class="number">0</span><span class="operator">]</span>   <span class="operator">=</span> <span class="number">1b</span>)    : Security bit
+    BMS                    (GPNVM<span class="operator">[</span><span class="number">1</span><span class="operator">]</span>   <span class="operator">=</span> <span class="number">1b</span>)    : Bank Swap
+    EFL_MASK               (GPNVM<span class="operator">[</span><span class="number">4</span>:<span class="number">2</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">111b</span>)  : Erase Flash Lock mask
+    EFL                    (GPNVM<span class="operator">[</span><span class="number">4</span>:<span class="number">2</span><span class="operator">]</span> <span class="operator">!</span><span class="operator">=</span> <span class="number">0b</span>)   : Erase Flash Lock set
+    SBS_MASK               (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1111b</span>) : System Boot Selection
+    SAMBA_MONITOR          (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">0000b</span>) : SAM<span class="operator">-</span>BA <span class="keyword">monitor</span> selected
+    STANDARD_BOOT          (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">0011b</span>) : Boot from internal flash in standard boot mode selected
+    SECURE_SAMBA_MONITOR   (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1001b</span>) : secure SAM<span class="operator">-</span>BA monintor selected
+    SECURE_BOOT            (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1010b</span>) : Boot from internal flash in secure boot mode (w<span class="operator">/</span> <span class="keyword">monitor</span> fall<span class="operator">-</span>back) selected
+    SECURE_BOOT_NO_MONITOR (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1100b</span>) : Boot from internal flash in secure boot mode (w<span class="operator">/</span>o <span class="keyword">monitor</span> fall<span class="operator">-</span>back) selected
+
+Please refer to the <span class="char">'ROM Code and Boot Strategies'</span> section of the PIC32CXMT datasheet<span class="operator">.</span></pre>
+<p>The <i>setgpnvm</i> command also takes one mandatory parameter for the <i>value</i> to be set into the GPNVM bits:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c setgpnvm:help
+<span class="operator">*</span> setgpnvm <span class="operator">-</span> set GPNVM bits
+Syntax:
+    setgpnvm:<span class="operator">&lt;</span>value<span class="operator">&gt;</span>:<span class="operator">[</span><span class="operator">&lt;</span>mask<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    setgpnvm:<span class="number">0x1</span>                     set GPNMV<span class="operator">[</span><span class="number">0</span><span class="operator">]</span> to <span class="number">1b</span><span class="operator">,</span> clear all other GPNVMs
+    setgpnvm:<span class="number">0x0</span>:<span class="number">0x1</span>                 clear GPNVM<span class="operator">[</span><span class="number">0</span><span class="operator">]</span>
+    setgpnvm:<span class="number">0x060</span>:<span class="number">0x1e0</span>             set GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> to <span class="number">0011b</span>
+    setgpnvm:STANDARD_BOOT:SBS_MASK  set GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> to <span class="number">0011b</span>
+
+<span class="operator">&lt;</span>value<span class="operator">&gt;</span> and <span class="operator">&lt;</span>mask<span class="operator">&gt;</span> values can be either numbers <span class="keyword">or</span> sequences of tokens separated by commas:
+    SECURITY               (GPNVM<span class="operator">[</span><span class="number">0</span><span class="operator">]</span>   <span class="operator">=</span> <span class="number">1b</span>)    : Security bit
+    BMS                    (GPNVM<span class="operator">[</span><span class="number">1</span><span class="operator">]</span>   <span class="operator">=</span> <span class="number">1b</span>)    : Bank Swap
+    EFL_MASK               (GPNVM<span class="operator">[</span><span class="number">4</span>:<span class="number">2</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">111b</span>)  : Erase Flash Lock mask
+    EFL                    (GPNVM<span class="operator">[</span><span class="number">4</span>:<span class="number">2</span><span class="operator">]</span> <span class="operator">!</span><span class="operator">=</span> <span class="number">0b</span>)   : Erase Flash Lock set
+    SBS_MASK               (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1111b</span>) : System Boot Selection
+    SAMBA_MONITOR          (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">0000b</span>) : SAM<span class="operator">-</span>BA <span class="keyword">monitor</span> selected
+    STANDARD_BOOT          (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">0011b</span>) : Boot from internal flash in standard boot mode selected
+    SECURE_SAMBA_MONITOR   (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1001b</span>) : secure SAM<span class="operator">-</span>BA monintor selected
+    SECURE_BOOT            (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1010b</span>) : Boot from internal flash in secure boot mode (w<span class="operator">/</span> <span class="keyword">monitor</span> fall<span class="operator">-</span>back) selected
+    SECURE_BOOT_NO_MONITOR (GPNVM<span class="operator">[</span><span class="number">8</span>:<span class="number">5</span><span class="operator">]</span> <span class="operator">=</span> <span class="number">1100b</span>) : Boot from internal flash in secure boot mode (w<span class="operator">/</span>o <span class="keyword">monitor</span> fall<span class="operator">-</span>back) selected
+
+Please refer to the <span class="char">'ROM Code and Boot Strategies'</span> section of the PIC32CXMT datasheet<span class="operator">.</span></pre>
+<a name="the-getwpmr-and-setwpmr-commands"></a>
+<h3 >The getwpmr and setwpmr commands</h3>
+<p>The <i>getwpmr</i> command reads whereas the <i>setwpmr</i> command updates the Write Protection Mode Register (EEFC_WPMR) of the selected flash controller (SEFCx). Both commands can take an optional <i>mask</i> parameter to filter the EEFC_WPMR bits upon which the command applies. If no <i>mask</i> is provided, then then command applies to the all register bits:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c getwpmr:help
+<span class="operator">*</span> getwpmr <span class="operator">-</span> get Write Protect Mode Register (EEFC_WPMR)
+Syntax:
+    getwpmr:<span class="operator">[</span><span class="operator">&lt;</span>mask<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    getwpmr                get EEFC_WPMR
+    getwpmr:<span class="number">0x0000ff00</span>     get bits <span class="number">15</span>:<span class="number">8</span> of EEFC_WPMR
+    getwpmr:USRWP          get bit <span class="number">4</span> of EEFC_WPMR
+
+<span class="operator">&lt;</span>mask<span class="operator">&gt;</span> value can be either a number <span class="keyword">or</span> a sequence of tokens separated by commas:
+    WPEN    : bit <span class="number">0</span> of EEFC_WPMR
+    GPNVMWP : bit <span class="number">1</span> of EEFC_WPMR
+    LOCKWP  : bit <span class="number">2</span> of EEFC_WPMR
+    ERASEWP : bit <span class="number">3</span> of EEFC_WPMR
+    USRWP   : bit <span class="number">4</span> of EEFC_WPMR
+    ERASEWL : bit <span class="number">7</span> of EEFC_WPMR
+
+Please refer to the <span class="char">'Secure Embedded Flash Controller (SEFC)'</span> section of the PIC32CXMT datasheet<span class="operator">.</span></pre>
+<p>The <i>setgpnvm</i> command also takes one mandatory parameter for the <i>value</i> to be set into the EEFC_WPMR register:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c setwpmr:help
+<span class="operator">*</span> setwpmr <span class="operator">-</span> set Write Protect Mode Register (EEFC_WPMR)
+Syntax:
+    setwpmr:<span class="operator">&lt;</span>value<span class="operator">&gt;</span>:<span class="operator">[</span><span class="operator">&lt;</span>mask<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    setwpmr:<span class="number">0x00000101</span>:<span class="number">0x01000101</span> set bits <span class="number">0</span> and <span class="number">8</span><span class="operator">,</span> clear bit <span class="number">24</span> of EEFC_WPMR
+    setwpmr:<span class="number">0</span>:USRWP               clear bit <span class="number">4</span> of EEFC_WPMR
+
+<span class="operator">&lt;</span>value<span class="operator">&gt;</span> and <span class="operator">&lt;</span>mask<span class="operator">&gt;</span> values can be either numbers <span class="keyword">or</span> sequences of tokens separated by commas:
+    WPEN    : bit <span class="number">0</span> of EEFC_WPMR
+    GPNVMWP : bit <span class="number">1</span> of EEFC_WPMR
+    LOCKWP  : bit <span class="number">2</span> of EEFC_WPMR
+    ERASEWP : bit <span class="number">3</span> of EEFC_WPMR
+    USRWP   : bit <span class="number">4</span> of EEFC_WPMR
+    ERASEWL : bit <span class="number">7</span> of EEFC_WPMR
+
+Please refer to the <span class="char">'Secure Embedded Flash Controller (SEFC)'</span> section of the PIC32CXMT datasheet<span class="operator">.</span></pre>
+<a name="the-getusr-and-setusr-commands"></a>
+<h3 >The getusr and setusr commands</h3>
+<p>The <i>getusr</i> command is used to read while the <i>setusr</i> command writes the User Signature Rights Register (EEFC_USR) of the selected flash controller (SEFCx). Both commands can take an optional <i>mask</i> parameter to filter the EEFC_USR bits upon which the command applies. If no <i>mask</i> is provided, then then command applies to the all register bits:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c getusr:help
+<span class="operator">*</span> getusr <span class="operator">-</span> get User Signature Rights Register (EEFC_USR)
+Syntax:
+    getusr:<span class="operator">[</span><span class="operator">&lt;</span>mask<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    getusr                 get EEFC_USR
+    getusr:<span class="number">0x0000ff00</span>      get bits <span class="number">15</span>:<span class="number">8</span> of EEFC_USR
+    getuser:RDENUSB_MASK   get bits <span class="number">7</span>:<span class="number">0</span> of EEFC_USR
+
+<span class="operator">&lt;</span>mask<span class="operator">&gt;</span> value can be either a number <span class="keyword">or</span> a sequence of tokens seperated by commas:
+    RDENUSB_MASK  : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">0</span>)
+    RDENUSBx      : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">0</span>)) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+    WRENUSB_MASK  : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">8</span>)
+    WRENUSBx      : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">8</span>)) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+    PRIVUSB_MASK  : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">16</span>)
+    PRIVUSBx      : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">16</span>) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+    LOCKUSRB_MASK : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">24</span>)
+    LOCKUSRBx     : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">24</span>)) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+
+Please refer to the <span class="char">'Secure Embedded Flash Controller (SEFC)'</span> section of the PIC32CXMT datasheet<span class="operator">.</span></pre>
+<p>The <i>setusr</i> command also takes one mandatory parameter for the <i>value</i> to be set into the EEFC_USR register:</p>
+<pre class="cpp">$ sam<span class="operator">-</span>ba <span class="operator">-</span>p serial <span class="operator">-</span>d pic32cxmt <span class="operator">-</span>a internalflash <span class="operator">-</span>c setusr:help
+<span class="operator">*</span> setusr <span class="operator">-</span> set User Signature Rights Register (EEFC_USR)
+Syntax:
+    setsur:<span class="operator">&lt;</span>value<span class="operator">&gt;</span>:<span class="operator">[</span><span class="operator">&lt;</span>mask<span class="operator">&gt;</span><span class="operator">]</span>
+Examples:
+    setwp:<span class="number">0x00000101</span>:<span class="number">0x01000101</span> set bits <span class="number">0</span> and <span class="number">8</span><span class="operator">,</span> clear bit <span class="number">24</span> of EEFC_USR
+    setwp:RDENUSB0<span class="operator">,</span>RDENUSB_MASK set bits <span class="number">7</span>:<span class="number">0</span> of EEFC_USR to <span class="number">00000001b</span>
+
+<span class="operator">&lt;</span>value<span class="operator">&gt;</span> and <span class="operator">&lt;</span>mask<span class="operator">&gt;</span> values can be either numbers <span class="keyword">or</span> sequences of tokens seperated by commas:
+    RDENUSB_MASK  : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">0</span>)
+    RDENUSBx      : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">0</span>)) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+    WRENUSB_MASK  : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">8</span>)
+    WRENUSBx      : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">8</span>)) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+    PRIVUSB_MASK  : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">16</span>)
+    PRIVUSBx      : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">16</span>) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+    LOCKUSRB_MASK : (<span class="number">0xff</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> <span class="number">24</span>)
+    LOCKUSRBx     : (<span class="number">0x01</span> <span class="operator">&lt;</span><span class="operator">&lt;</span> (x <span class="operator">+</span> <span class="number">24</span>)) with x in <span class="operator">[</span><span class="number">0..7</span><span class="operator">]</span>
+
+Please refer to the <span class="char">'Secure Embedded Flash Controller (SEFC)'</span> section of the PIC32CXMT datasheet<span class="operator">.</span></pre>
+</div>
+<!-- @@@internalflash.html -->
+<p /><address><hr /><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr class="address">
+<td width="60%" align="left">Copyright &copy; 2018 Microchip Technology</td>
+<td width="40%" align="right"><div align="right">SAM-BA Documentation</div></td>
+</tr></table></div></address></body>
+</html>

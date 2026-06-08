@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP IS25LP512M-JLLE
+D NOR Flash 512Mb QPI/QSPI, WSON, RoHS
+K
+F https://www.arrow.com/en/products/is25lp512m-jlle/integrated-silicon-solution-inc
+$ENDCMP
+#
+#End Doc Library

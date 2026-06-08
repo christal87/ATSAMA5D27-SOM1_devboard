@@ -1,0 +1,140 @@
+PCBNEW-LibModule-V1  2020-11-26 13:08:08
+# encoding utf-8
+Units mm
+$INDEX
+DM1AA-SF-PEJ(21)_1
+$EndINDEX
+$MODULE DM1AA-SF-PEJ(21)_1
+Po 0 0 0 15 5fbfa8b8 00000000 ~~
+Li DM1AA-SF-PEJ(21)_1
+Cd DM1AA-SF-PEJ(21)
+Kw Connector
+Sc 0
+At STD
+AR 
+Op 0 0 0
+T0 11.329 14.411 1.27 1.27 0 0.254 N V 21 N "J**"
+T1 11.329 14.411 1.27 1.27 0 0.254 N I 21 N "DM1AA-SF-PEJ(21)_1"
+DS -2.1 -2.2 25.9 -2.2 0.2 24
+DS 25.9 -2.2 25.9 28.3 0.2 24
+DS 25.9 28.3 -2.1 28.3 0.2 24
+DS -2.1 28.3 -2.1 -2.2 0.2 24
+DS -2.1 28.3 25.9 28.3 0.2 21
+DS 25.9 5.9 25.9 21.8 0.2 21
+DS -2.1 -2.2 -2.1 3.273 0.2 21
+DS 25.9 -2.2 25.9 3.273 0.2 21
+DS -2.1 -2.2 0.319 -2.2 0.2 21
+DS 25.9 -2.2 21.567 -2.2 0.2 21
+DC 17.993 -4.067 17.82885 -4.067 0.254 21
+$PAD
+Po 17.975 -2.2
+Sh "1" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 15.475 -2.2
+Sh "2" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 12.975 -2.2
+Sh "3" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 10.475 -2.2
+Sh "4" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 7.975 -2.2
+Sh "5" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 5.475 -2.2
+Sh "6" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 3.05 -2.2
+Sh "7" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 1.35 -2.2
+Sh "8" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 20.475 -2.2
+Sh "9" R 1.1 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -2.2 9.2
+Sh "10" R 1 2 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -2.2 18.15
+Sh "11" R 1 2 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -2.2 20.75
+Sh "12" R 1 2 0 0 900
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -2.6 23.2
+Sh "13" R 2 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 26.4 23.2
+Sh "14" R 2 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 26.4 4.55
+Sh "15" R 2 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po -2.6 4.55
+Sh "16" R 2 2 0 0 0
+At SMD N 00888000
+Ne 0 ""
+$EndPAD
+$PAD
+Po 0 0
+Sh "17" C 2.2 2.2 0 0 900
+Dr 1.4 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$PAD
+Po 22.4 0
+Sh "18" C 2.2 2.2 0 0 900
+Dr 1.4 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+$EndPAD
+$EndMODULE DM1AA-SF-PEJ(21)_1
+$EndLIBRARY

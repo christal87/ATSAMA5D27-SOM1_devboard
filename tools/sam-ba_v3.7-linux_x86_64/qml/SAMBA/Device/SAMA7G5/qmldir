@@ -1,0 +1,10 @@
+module SAMBA.Device.SAMA7G5
+BCP 3.7 sama7g5-bcp.js
+BSCR 3.7 sama7g5-bscr.js
+SAMA7G5 3.7 SAMA7G5.qml
+SAMA7G5BootConfigApplet 3.7 SAMA7G5BootConfigApplet.qml
+SAMA7G5Config 3.7 SAMA7G5Config.qml
+SAMA7G5EK 3.7 SAMA7G5EK.qml
+SAMA7G5PairingModeApplet 3.7 SAMA7G5PairingModeApplet.qml
+SBCP 3.7 sama7g5-sbcp.js
+UHCP 3.7 sama7g5-uhcp.js

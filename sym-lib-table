@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name ATSAMA5D27-SOM1_devboard2-rescue)(type Legacy)(uri ${KIPRJMOD}/ATSAMA5D27-SOM1_devboard2-rescue.lib)(options "")(descr ""))
+)

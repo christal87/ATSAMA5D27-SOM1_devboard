@@ -1,0 +1,10 @@
+module SAMBA.Device.SAM9X60
+BCP 3.7 sam9x60-bcp.js
+BSCR 3.7 sam9x60-bscr.js
+SAM9X60 3.7 SAM9X60.qml
+SAM9X60BootConfigApplet 3.7 SAM9X60BootConfigApplet.qml
+SAM9X60Config 3.7 SAM9X60Config.qml
+SAM9X60EK 3.7 SAM9X60EK.qml
+SAM9X60PairingModeApplet 3.7 SAM9X60PairingModeApplet.qml
+SBCP 3.7 sam9x60-sbcp.js
+UHCP 3.7 sam9x60-uhcp.js

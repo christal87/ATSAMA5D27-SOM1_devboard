@@ -1,0 +1,35 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#SamacSys ECAD Model DM1AA-SF-PEJ_21_
+#/569937/133399/2.47/12/4/Connector
+DEF DM1AA-SF-PEJ_21_ J 0 30 Y Y 1 F N
+F0 "J" 1850 300 50 H V L CNN
+F1 "DM1AA-SF-PEJ_21_" 1850 200 50 H V L CNN
+F2 "DM1AA-SF-PEJ(21)_1" 1850 100 50 H I L CNN
+F3 "http://www.mouser.com/ds/2/185/DM1_catalog-939166.pdf" 1850 0 50 H I L CNN
+F4 "Memory Card Connectors SD MEM CD CONN R/A SMT PUSHPUSH" 1850 -100 50 H I L CNN "Description"
+F5 "" 1850 -200 50 H I L CNN "Height"
+F6 "Hirose" 1850 -300 50 H I L CNN "Manufacturer_Name"
+F7 "DM1AA-SF-PEJ(21)" 1850 -400 50 H I L CNN "Manufacturer_Part_Number"
+F8 "DM1AA-SF-PEJ(21)" 1850 -500 50 H I L CNN "Arrow Part Number"
+F9 "https://www.arrow.com/en/products/dm1aa-sf-pej-21/hirose-electric" 1850 -600 50 H I L CNN "Arrow Price/Stock"
+F10 "798-DM1AA-SF-PEJ21" 1850 -700 50 H I L CNN "Mouser Part Number"
+F11 "https://www.mouser.co.uk/ProductDetail/Hirose-Connector/DM1AA-SF-PEJ21?qs=nSryOFbzj8L%252BONcw9B%252BBCw%3D%3D" 1850 -800 50 H I L CNN "Mouser Price/Stock"
+DRAW
+X 1 1 0 0 200 R 50 50 0 0 P
+X 2 2 0 -100 200 R 50 50 0 0 P
+X 3 3 0 -200 200 R 50 50 0 0 P
+X 4 4 0 -300 200 R 50 50 0 0 P
+X 5 5 0 -400 200 R 50 50 0 0 P
+X 6 6 0 -500 200 R 50 50 0 0 P
+X 7 7 2000 0 200 L 50 50 0 0 P
+X 8 8 2000 -100 200 L 50 50 0 0 P
+X 9 9 2000 -200 200 L 50 50 0 0 P
+X CARD_DETECTION_SWITCH 10 2000 -300 200 L 50 50 0 0 P
+X WRITE_PROTECTION_SWITCH_1 11 2000 -400 200 L 50 50 0 0 P
+X WRITE_PROTECTION_SWITCH_2 12 2000 -500 200 L 50 50 0 0 P
+P 5 0 1 6 200 100 1800 100 1800 -600 200 -600 200 100 N
+ENDDRAW
+ENDDEF
+#
+#End Library

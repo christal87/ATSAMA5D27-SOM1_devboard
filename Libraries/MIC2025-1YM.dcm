@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP MIC2025-1YM
+D MICROCHIP - MIC2025-1YM - IC, POWER DIS SWITCH, 1.25A, 1CH
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/mic2025.pdf
+$ENDCMP
+#
+#End Doc Library

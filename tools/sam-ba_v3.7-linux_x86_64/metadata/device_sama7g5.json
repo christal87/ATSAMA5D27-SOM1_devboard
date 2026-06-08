@@ -1,0 +1,6 @@
+{
+	"module": "SAMBA.Device.SAMA7G5",
+    "module_version": "3.7",
+	"classname": "SAMA7G5",
+	"type": "device"
+}

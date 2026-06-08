@@ -1,0 +1,4 @@
+module SAMBA.Tool
+AppletCommandHandler 3.7 AppletCommandHandler.qml
+MonitorCommandHandler 3.7 MonitorCommandHandler.qml
+ScriptProxy 3.7 ScriptProxy.qml
