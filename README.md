@@ -18,3 +18,5 @@ A custom SAMA5D27 development board I made a while ago for personal experimentat
 - [ ] use (Q)SPI to store the bootloader as NVM
 - [ ] test other interfaces (JTAG, UARTs, USB device, ethernet, I^2C, SPI, PIOBU, HSIC)
 - [ ] bonus: design and add an eMMC breakout board
+
+![ATSAMA5D27-SOM1_devboard_built1](docs/built1.jpeg "ATSAMA5D27-SOM1 devboard built")
