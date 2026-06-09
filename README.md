@@ -15,6 +15,6 @@ A custom SAMA5D27 development board I made a while ago for personal experimentat
 - [ ] Implement NAND support in the at91bootstrap 2nd level bootloader and U-Boot
 - [ ] Compile a kernel and make a rootfs that boots from NAND (buildroot/linux4sam custom board and kernel configs)
 - [ ] test (Q)SPI interfaces
-- [ ] use (Q)SPI to store the bootloader and NVRAM
+- [ ] use (Q)SPI to store the bootloader as NVM
 - [ ] test other interfaces (JTAG, UARTs, USB device, ethernet, I^2C, SPI, PIOBU, HSIC)
 - [ ] bonus: design and add an eMMC breakout board
